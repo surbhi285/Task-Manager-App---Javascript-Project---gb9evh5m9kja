@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <nav class = "navbar">
+            <div class="left">
+             <img src="./task.png">
+            </div>
+            <h1>Task Manager App</h1>
+            <div class="right">
+                <div class="about mx"><strong><a href="#about" >About Us</a></strong></div>
+                <div class="addtask mx"><strong><a href="#addtask">Add Task</a></strong></div>
+            </div>
+        </nav>
+    </header>
+    <section>
+     <div class ="about">
+        <div class="info">
+        <div class ="overlay">
+        <h1> ABOUT Us</h1>
+        <p class="info"><strong>Task Manager App</strong> basically a web-based platform that allows everyday users and 
+        businesses to manage their to-do lists in the most efficient manner. It provides you with the tools 
+        to create, assign, collaborate, track, and deliver tasks within the desired time frame and quality 
+        standards.</p>
+    </div>
+    </div>
+     </div>
+    </section>
+    <section>
+    <form id="taskform" class="taskForm">
+    <input type="text" id="taskName" placeholder="Enter task name">
+    <button type ="submit" class="button"><Strong>ADD TASK</Strong></button>
+    </form>
+    </section>
+    <section class="main">
+    <main class="container">
+    <div class = "section" id="openSection">
+    <h2 class="list">Open</h2>
+    <ul class="task-list" id="open"></ul>
+     </div>
+     
+     <div class="section" id="progressSection">
+     <h2 class="list">Progress</h2>
+     <ul class="task-list" id="progress"></ul>
+     </div>
+     
+     <div class="section" id="reviewSection">
+     <h2 class="list">Review</h2>
+     <ul class="task-list" id="review"></ul>
+     </div>
+     
+     <div class="section" id="doneSection">
+     <h2 class="list">Done</h2>
+     <ul class="task-list" id="done"></ul>
+     </div>
+    </main>
+    </section>
+        
+        <section class="modal" id="taskModal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Task</h3>
+        <textarea id="taskdescription" placeholder="Description..."></textarea>
+        <br />
+        <button class="save-btn" id="saveDescription">Save</button>
+        <button class="delete-btn" id="deleteTask">Delete</button>
+        </div>
+        </section>
+    
+<script src="./script.js"></script>
+</body>
+</html>
