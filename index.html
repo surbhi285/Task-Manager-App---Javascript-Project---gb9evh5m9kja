@@ -1,79 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Manager</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <nav class = "navbar">
-            <div class="left">
-             <img src="./https://cdn-icons-png.flaticon.com/512/2098/2098402.png">
-            </div>
-            <h1>Task Manager App</h1>
-            <div class="right">
-                <div class="about mx"><strong><a href="#about" >About Us</a></strong></div>
-                <div class="addtask mx"><strong><a href="#addtask">Add Task</a></strong></div>
-            </div>
-        </nav>
+        <h1>Task Manager</h1>
     </header>
-    <section>
-     <div class ="about">
-        <div class="info">
-        <div class ="overlay">
-        <h1> ABOUT Us</h1>
-        <p class="info"><strong>Task Manager App</strong> basically a web-based platform that allows everyday users and 
-        businesses to manage their to-do lists in the most efficient manner. It provides you with the tools 
-        to create, assign, collaborate, track, and deliver tasks within the desired time frame and quality 
-        standards.</p>
-    </div>
-    </div>
-     </div>
-    </section>
-    <section>
-    <form id="taskform" class="taskForm">
-    <input type="text" id="taskName" placeholder="Enter task name">
-    <button type ="submit" class="button"><Strong>ADD TASK</Strong></button>
-    </form>
-    </section>
-    <section class="main">
-    <main class="container">
-    <div class = "section" id="openSection">
-    <h2 class="list">Open</h2>
-    <ul class="task-list" id="open"></ul>
-     </div>
-     
-     <div class="section" id="progressSection">
-     <h2 class="list">Progress</h2>
-     <ul class="task-list" id="progress"></ul>
-     </div>
-     
-     <div class="section" id="reviewSection">
-     <h2 class="list">Review</h2>
-     <ul class="task-list" id="review"></ul>
-     </div>
-     
-     <div class="section" id="doneSection">
-     <h2 class="list">Done</h2>
-     <ul class="task-list" id="done"></ul>
-     </div>
-    </main>
-    </section>
-        
-        <section class="modal" id="taskModal">
-        <div class="modal-content">
-        <span class="close">&times;</span>
-        <h3>Task</h3>
-        <textarea id="taskdescription" placeholder="Description..."></textarea>
-        <br />
-        <button class="save-btn" id="saveDescription">Save</button>
-        <button class="delete-btn" id="deleteTask">Delete</button>
+    <section id="content-sec">
+      <div class="header">
+        <input class="add_input" type="text"/>
+        <button type="submit" class="add_btn">Add Task</button>
+      </div>
+      <div class="container">
+        <div class="container_list" id="box1">
+          <div class="heading">
+            <h2>OPEN</h2>
+          </div>
         </div>
-        </section>
-    
-<script src="./script.js"></script>
-</body>
+        <div class="container_list" id="box2">
+          <div class="heading">
+            <h2>PROGRESS</h2>
+          </div>
+        </div>
+        <div class="container_list" id="box3">
+          <div class="heading">
+            <h2>REVIEW</h2>
+          </div>
+        </div>
+        <div class="container_list" id="box4">
+          <div class="heading">
+            <h2>DONE</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- i have added the elements for modle -->
+
+    <div class="modle-container"></div>
+
+    <!-- this is the end -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Task Description</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Task:</label>
+                <input type="text" class="form-control" id="recipient-name" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Description:</label
+                >
+                <textarea class="form-control" id="message-text"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="add-para">
+              Save Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
 </html>

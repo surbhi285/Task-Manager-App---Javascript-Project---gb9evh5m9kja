@@ -1,173 +1,122 @@
-class TaskManager {
-    constructor() {
-      this.tasks = [];
-      this.currentId = 0;
-    }
-  
-    addTask(name) {
-      const task = {
-        id: this.currentId++,
-        name: name,
-        description: "",
-        status: "open"
-      };
-      this.tasks.push(task);
-      this.renderTasks();
-    }
-  
-    updateTaskDescription(id, description) {
-      const task = this.tasks.find(task => task.id === id);
-      if (task) {
-        task.description = description;
-        this.renderTasks();
-      }
-    }
-  
-    updateTaskStatus(id, status) {
-      const task = this.tasks.find(task => task.id === id);
-      if (task) {
-        task.status = status;
-        this.renderTasks();
-      }
-    }
-  
-    removeTask(id) {
-      const taskIndex = this.tasks.findIndex(task => task.id === id);
-      if (taskIndex !== -1) {
-        this.tasks.splice(taskIndex, 1);
-        this.renderTasks();
-      }
-    }
-  
-    renderTasks() {
-      const openList = document.getElementById("open");
-      const inProgressList = document.getElementById("progress");
-      const inReviewList = document.getElementById("review");
-      const doneList = document.getElementById("done");
-  
-      // Clear task lists
-      openList.innerHTML = "";
-      inProgressList.innerHTML = "";
-      inReviewList.innerHTML = "";
-      doneList.innerHTML = "";
-  
-      // Render tasks based on status
-      this.tasks.forEach(task => {
-        const li = document.createElement("li");
-        li.textContent = task.name;
-        li.draggable = true;
-  
-        // Add event listener for opening the description modal
-        li.addEventListener("click", () => {
-          this.openTaskDescriptionModal(task);
-        });
-  
-        // Add event listener for drag start
-        li.addEventListener("dragstart", (event) => {
-          event.dataTransfer.setData("text/plain", task.id);
-        });
+let taskHeading = document.querySelector(".task-heading");
+let input = document.querySelector(".add_input");
+let button = document.querySelector(".add_btn");
+const containerList = document.querySelector(".container_list");
+const modle_container = document.querySelector('.modle-container');
 
-        // Create the circle tag
-        const circle = document.createElement("span");
-        circle.classList.add("circle");
-  
-        // Assign the task to the appropriate list based on status
-        switch (task.status) {
-          case "open":
-            circle.style.backgroundColor = "orange";
-            openList.appendChild(li);
-            break;
-          case "inProgress":
-            circle.style.backgroundColor = "red";
-            inProgressList.appendChild(li);
-            break;
-          case "inReview":
-            circle.style.backgroundColor = "purple";
-            inReviewList.appendChild(li);
-            break;
-          case "done":
-            circle.style.backgroundColor = "green";
-            doneList.appendChild(li);
-            break;
-        }
-        li.appendChild(circle);
-      });
+input.setAttribute("placeholder", "Please Enter Task");
+
+/*-----add task-----*/
+function addTask() {
+    if(input.value === "") {
+        alert("Please Enter Task");
     }
-  
-    openTaskDescriptionModal(task) {
-      const modal = document.getElementById("taskModal");
-      const description = document.getElementById("taskdescription");
-      const saveBtn = document.getElementById("saveDescription");
-      const deleteBtn = document.getElementById("deleteTask");
-  
-      description.value = task.description;
-  
-      saveBtn.addEventListener("click", () => {
-        this.updateTaskDescription(task.id, description.value);
-        modal.style.display = "none";
-      });
-  
-      deleteBtn.addEventListener("click", () => {
-        this.removeTask(task.id);
-        modal.style.display = "none";
-      });
-  
-      modal.style.display = "block";
-    }
-  
-    closeTaskDescriptionModal() {
-      const modal = document.getElementById("taskModal");
-      modal.style.display = "none";
-    }
+    else {
+    let inputValue = input.value;
+
+    const openList = document.createElement('div');
+    openList.classList = "container-list1-item";
+    const nameOfTask = document.createElement('h4');
+    nameOfTask.innerText = inputValue;
+    const descriptionOfTask = document.createElement('p');
+    descriptionOfTask.classList = "description";
+
+    const deleteTask = document.createElement('button');
+    deleteTask.classList = "delete";
+    deleteTask.innerText = "";
+
+    /*----------color change each div--------*/
+    const itemColor = document.createElement('div');
+    itemColor.classList.add('item-color');
+    openList.appendChild(itemColor);
+
+    openList.append(nameOfTask, descriptionOfTask, deleteTask)
+    containerList.appendChild(openList);
+/*------------Delete Task-------*/
+    deleteTask.addEventListener('click', (e) => {
+        e.stopPropagation()
+        openList.remove();
+    })
+    editModel(openList, nameOfTask, descriptionOfTask);
+    input.value = null;
+  /*--------dragging and dropping-------*/    
+  openList.setAttribute("draggable", "true");
+    openList.addEventListener('dragstart', () => {
+        openList.classList.add('dragging');
+    });
+    openList.addEventListener('dragend', () => {
+        openList.classList.remove('dragging');
+    });
+/*-----------dragOver------*/
+    const listcontainer = document.querySelectorAll('.container_list');
+    listcontainer.forEach((list) => {
+        list.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const draggingElm = document.querySelector('.dragging');
+            list.appendChild(draggingElm);
+        })
+    })
+
 }
-  
-  // Create an instance of the TaskManager class
-  const taskManager = new TaskManager();
-  
-  // Event listener for form submission
-  const taskForm = document.getElementById("taskform");
-  taskForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const taskNameInput = document.getElementById("taskName");
-    const taskName = taskNameInput.value.trim();
-    if (taskName !== "") {
-      taskManager.addTask(taskName);
-      taskNameInput.value = "";
-    }
-  });
-  
-  // Event listener for drop targets
-  const dropTargets = document.getElementsByClassName("task-list");
-  Array.from(dropTargets).forEach(target => {
-    target.addEventListener("dragover", (event) => {
-      event.preventDefault();
-    });
-  
-    target.addEventListener("drop", (event) => {
-      event.preventDefault();
-      const taskId = event.dataTransfer.getData("text/plain");
-      const targetId = event.currentTarget.id;
-  
-      switch (targetId) {
-        case "open":
-          taskManager.updateTaskStatus(Number(taskId), "open");
-          break;
-        case "progress":
-          taskManager.updateTaskStatus(Number(taskId), "inProgress");
-          break;
-        case "review":
-          taskManager.updateTaskStatus(Number(taskId), "inReview");
-          break;
-        case "done":
-          taskManager.updateTaskStatus(Number(taskId), "done");
-          break;
-      }
-    });
-  });
-  
-  // Event listener for closing the description modal
-  const closeModalBtn = document.getElementsByClassName("close")[0];
-  closeModalBtn.addEventListener("click", () => {
-    taskManager.closeTaskDescriptionModal();
-  });
+}
+/*--------edit Modal-------*/
+function editModel(div, ip, des) {
+    div.addEventListener('dblclick', (e) => {
+        e.stopPropagation()
+        const storeDiv = document.createElement('div');
+        storeDiv.classList = "modle-container-style"
+        const taskLable = document.createElement('lable');
+        taskLable.innerText = "Task Name";
+        const descriptionLable = document.createElement('lable');
+        descriptionLable.innerText = "Description";
 
+        const inputTask = document.createElement('input');
+        inputTask.classList = "editInput";
+        inputTask.setAttribute('id', 'edit1');
+        inputTask.setAttribute('type', 'text');
+        inputTask.value = ip.innerText;
+
+        const textArea = document.createElement('textarea');
+        textArea.classList = "editInput"
+        textArea.setAttribute('cols', '5');
+        textArea.setAttribute('rows', '5');
+        textArea.value = des.innerText;
+
+        // const closeBtn = document.createElement('\u00d7;');
+        // closeBtn.classList = "close-btn";
+
+        const divButton = document.createElement('div');
+        divButton.classList = "buttonDiv";
+
+        const saveBtn = document.createElement('button');
+        saveBtn.innerText = 'save';
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = 'close';
+
+        divButton.appendChild(saveBtn);
+        divButton.appendChild(deleteBtn);
+        storeDiv.append(taskLable, inputTask, descriptionLable, textArea, divButton)
+        modle_container.appendChild(storeDiv)
+
+        saveTheEditedValue(saveBtn, ip, des, storeDiv, inputTask, textArea, "save");
+        saveTheEditedValue(deleteBtn, ip, des, storeDiv, inputTask, textArea, "close")
+        console.log(div.childNodes);
+    })
+}
+/*  --------------Save edit input------*/
+function saveTheEditedValue(btnFun, child, des, mainDiv, input1, input2, condition) {
+    btnFun.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (condition === "save") {
+            child = input1.value;
+            des.innerText = input2.value;
+            mainDiv.remove();
+        } else {
+            mainDiv.remove();
+        }
+
+    })
+}
+
+button.addEventListener('click', addTask)
