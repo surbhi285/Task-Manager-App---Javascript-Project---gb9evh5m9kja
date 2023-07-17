@@ -1,4 +1,3 @@
-let taskHeading = document.querySelector(".task-heading");
 let input = document.querySelector(".add_input");
 let button = document.querySelector(".add_btn");
 const containerList = document.querySelector(".container_list");
@@ -7,6 +6,9 @@ const modle_container = document.querySelector('.modle-container');
 input.setAttribute("placeholder", "Please Enter Task");
 
 /*-----add task-----*/
+
+button.addEventListener('click', addTask)
+
 function addTask() {
     if(input.value === "") {
         alert("Please Enter Task");
@@ -60,7 +62,7 @@ function addTask() {
 }
 }
 /*--------edit Modal-------*/
-function editModel(div, ip, des) {
+function editModel(div, nameOfTask, des) {
     div.addEventListener('dblclick', (e) => {
         e.stopPropagation()
         const storeDiv = document.createElement('div');
@@ -72,9 +74,9 @@ function editModel(div, ip, des) {
 
         const inputTask = document.createElement('input');
         inputTask.classList = "editInput";
-        inputTask.setAttribute('id', 'edit1');
+      
         inputTask.setAttribute('type', 'text');
-        inputTask.value = ip.innerText;
+        inputTask.value = nameOfTask.innerText;
 
         const textArea = document.createElement('textarea');
         textArea.classList = "editInput"
@@ -82,8 +84,6 @@ function editModel(div, ip, des) {
         textArea.setAttribute('rows', '5');
         textArea.value = des.innerText;
 
-        // const closeBtn = document.createElement('\u00d7;');
-        // closeBtn.classList = "close-btn";
 
         const divButton = document.createElement('div');
         divButton.classList = "buttonDiv";
@@ -99,8 +99,8 @@ function editModel(div, ip, des) {
         storeDiv.append(taskLable, inputTask, descriptionLable, textArea, divButton)
         modle_container.appendChild(storeDiv)
 
-        saveTheEditedValue(saveBtn, ip, des, storeDiv, inputTask, textArea, "save");
-        saveTheEditedValue(deleteBtn, ip, des, storeDiv, inputTask, textArea, "close")
+        saveTheEditedValue(saveBtn, nameOfTask, des, storeDiv, inputTask, textArea, "save");
+        saveTheEditedValue(deleteBtn, nameOfTask, des, storeDiv, inputTask, textArea, "close")
         console.log(div.childNodes);
     })
 }
@@ -119,4 +119,3 @@ function saveTheEditedValue(btnFun, child, des, mainDiv, input1, input2, conditi
     })
 }
 
-button.addEventListener('click', addTask)

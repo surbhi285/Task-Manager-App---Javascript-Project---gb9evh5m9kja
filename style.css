@@ -83,37 +83,15 @@ header h1{
   background-color: rgba(31, 14, 155, 0.259);
   border-radius:5px ;
 }
-.box{
-  width: 320px;
-  height: 442px;
-  border-radius:5px ;
-  background-color: #6e90e6;
-}
 
-#box1{
+#open, 
+#review,
+#progress,
+#done{
   margin: 4px;
   text-align: center;
   background-color: bisque;
 }
-#box2{
-  margin: 4px;
-  text-align: center;
-  background-color: bisque;
-
-}
-#box3{
-  margin: 4px;
-  text-align: center;
-  background-color: bisque;
-
-}
-#box4{
-  margin: 4px;
-  text-align: center;
-  background-color: bisque;
-
-}
-
 .heading{
   margin: 8px;
   border-radius: 5px;
@@ -150,7 +128,7 @@ header h1{
   border-radius: 5px;
   background-color:#d1b500;
 }
-#box2 .item-color{
+#progress .item-color{
   width: 32px;
   height: 8px;
   position: relative;
@@ -159,7 +137,7 @@ header h1{
   border-radius: 5px;
   background-color: #15adad;
 }
-#box3 .item-color{
+#review .item-color{
   width: 32px;
   height: 8px;
   position: relative;
@@ -168,7 +146,7 @@ header h1{
   border-radius: 5px;
   background-color: #3200b1;
 }
-#box4 .item-color{
+#done .item-color{
   width: 32px;
   height: 8px;
   position: relative;
@@ -232,44 +210,13 @@ lable {
 }
 
 .delete,
-#box2 .delete,
-#box3 .delete
-#box4 .delete{
+#progress .delete,
+#review .delete
+#done .delete{
   margin-top: 3px;
   margin-left: 235px;
   width: 15px;
   height: 15px;
-  /* border-radius: 50%; */
   border: solid 3px red;
   background-color: red;
 }
-
-/* #box2 .delete {
-  margin-top: 3px;
-  margin-left: 235px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  border: solid 3px #15adad;
-  background-color: #ffffff;
-} */
-
-/* #box3 .delete {
-  margin-top: 3px;
-  margin-left: 235px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  border: solid 3px #3200b1;
-  background-color: #ffffff;
-}
-
-#box4 .delete {
-  margin-top: 3px;
-  margin-left: 235px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  border: solid 3px rgb(17, 139, 17);
-  background-color: white;
-} */
