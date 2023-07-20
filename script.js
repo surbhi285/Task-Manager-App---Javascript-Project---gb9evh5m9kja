@@ -3,7 +3,7 @@ let button = document.querySelector(".add_btn");
 const containerList = document.querySelector(".container_list");
 const modle_container = document.querySelector('.modle-container');
 
-input.setAttribute("placeholder", "Please Enter Task");
+input.setAttribute("placeholder", "Please Enter Your Task...");
 
 /*-----add task-----*/
 
@@ -36,7 +36,7 @@ function addTask() {
     containerList.appendChild(openList);
 /*------------Delete Task-------*/
     deleteTask.addEventListener('click', (e) => {
-        e.stopPropagation()
+        
         openList.remove();
     })
     editModel(openList, nameOfTask, descriptionOfTask);
@@ -64,7 +64,7 @@ function addTask() {
 /*--------edit Modal-------*/
 function editModel(div, nameOfTask, des) {
     div.addEventListener('dblclick', (e) => {
-        e.stopPropagation()
+        
         const storeDiv = document.createElement('div');
         storeDiv.classList = "modle-container-style"
         const taskLable = document.createElement('lable');
@@ -107,7 +107,7 @@ function editModel(div, nameOfTask, des) {
 /*  --------------Save edit input------*/
 function saveTheEditedValue(btnFun, child, des, mainDiv, input1, input2, condition) {
     btnFun.addEventListener('click', (e) => {
-        e.stopPropagation();
+      
         if (condition === "save") {
             child = input1.value;
             des.innerText = input2.value;
