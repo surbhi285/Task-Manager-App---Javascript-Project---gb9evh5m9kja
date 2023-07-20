@@ -198,10 +198,7 @@ lable {
   font-weight: bolder;
 }
 
-.delete,
-#progress .delete,
-#review .delete
-#done .delete{
+.delete{
   margin-top: 3px;
   margin-left: 235px;
   width: 15px;

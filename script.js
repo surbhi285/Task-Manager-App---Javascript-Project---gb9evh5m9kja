@@ -35,8 +35,7 @@ function addTask() {
     openList.append(nameOfTask, descriptionOfTask, deleteTask)
     containerList.appendChild(openList);
 /*------------Delete Task-------*/
-    deleteTask.addEventListener('click', (e) => {
-        
+    deleteTask.addEventListener('click', () => {
         openList.remove();
     })
     editModel(openList, nameOfTask, descriptionOfTask);
